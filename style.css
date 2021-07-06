@@ -1,0 +1,218 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --clr-dark: #292c35;
+    --clr-light: #e3e3e3;
+    /* Light Mode Colors */
+    --clr-fg: var(--clr-dark);
+    --clr-bg: var(--clr-light);
+}
+
+@media (prefers-color-scheme: dark) {
+     :root {
+        /* Dark Mode Colors */
+        --clr-fg: var(--clr-light);
+        --clr-bg: var(--clr-dark);
+    }
+}
+
+.light {
+    /* Programmed light mode colors */
+    --clr-fg-lightmode: var(--clr-dark);
+    --clr-bg-lightmode: var(--clr-light);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-bg-lightmode, var(--clr-bg));
+    color: var(--clr-fg-lightmode, var(--clr-fg));
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin-inline: auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+
+#heading {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-block-end: 2rem;
+    width: 100%;
+}
+
+#book-form {
+    display: grid;
+    gap: 1rem;
+}
+
+#book-form>div {
+    display: grid;
+    gap: 0.2rem;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+#book-form>div label {
+    opacity: 0.7;
+}
+
+#book-form>div input[type='text'] {
+    padding: 1rem;
+    font-size: x-large;
+    background-color: #8884;
+    color: var(--clr-fg-lightmode, var(--clr-fg));
+}
+
+#submit-btn,
+#clear-btn {
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    width: fit-content;
+    justify-self: right;
+    letter-spacing: 1px;
+    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg));
+    border-radius: 5px;
+    background-color: #8884;
+    color: var(--clr-fg-lightmode, var(--clr-fg));
+}
+
+#submit-btn:hover,
+#submit-btn:active,
+#clear-btn:hover,
+#clear-btn:active {
+    border: 1px solid cyan;
+    background-color: #8888;
+}
+
+#submit-btn:active,
+#clear-btn:active {
+    transform: translatey(1px);
+}
+
+.label {
+    background-image: linear-gradient(to right, #aaa 48%, #111 52%, #444 52%);
+    margin-left: auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+    border: 2px solid #888;
+    border-radius: 50px;
+    box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
+    display: flex;
+    height: 31px;
+    width: 56px;
+    cursor: pointer;
+}
+
+.switch {
+    background-color: #888;
+    position: absolute;
+    top: 3px;
+    left: 3.5px;
+    border-radius: 50%;
+    box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
+    width: 22px;
+    height: 22px;
+    transition: transform 250ms ease-in;
+}
+
+.checkbox:checked+.label .switch {
+    transform: translateX(24px);
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    margin-block: 1rem;
+}
+
+th {
+    border: 1px solid #8888;
+    background-color: #8884;
+}
+
+td {
+    border: 1px solid #4448;
+}
+
+tr:nth-child(odd) {
+    background-color: #8882;
+}
+
+th,
+td {
+    padding: 0.5rem 1rem;
+}
+
+.delete {
+    cursor: pointer;
+    background-color: #8888;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    transition: background-color 250ms ease-out;
+}
+
+.delete:hover,
+.delete:focus {
+    background-color: #f888;
+}
+
+input[type='checkbox'] {
+    display: none;
+}
+
+.success,
+.error {
+    color: var(--clr-fg-lightmode, var(--clr-fg));
+    padding: 0.3em 1em;
+    margin: 5px 0 15px 0;
+    animation: fade-to-bg 3s forwards, fade 1s forwards 2s;
+    transform-origin: top;
+    border-radius: 1em;
+}
+
+.success {
+    background-color: #0f06;
+}
+
+.error {
+    background-color: #f006;
+}
+
+.button {
+    float: right;
+}
+
+@keyframes fade-to-bg {
+    to {
+        background-color: var(--clr-bg-lightmode, var(--clr-bg));
+    }
+}
+
+@keyframes fade {
+    to {
+        opacity: 0;
+    }
+}

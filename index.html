@@ -1,113 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
-        />
-        <style>
-            /* dark mode start */
-            body.dark {
-                background-color: #292c35 !important;
-            }
-            /* optional */
-            body.dark h1 {
-                color: #fff !important;
-            }
 
-            a {
-                text-decoration: none;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Book List</title>
+</head>
 
-            body.dark th {
-                color: #fff !important;
-            }
-
-            body.dark td {
-                color: #fff !important;
-            }
-
-            body.dark a {
-                color: #fff !important;
-            }
-
-            body.dark input {
-                color: #fff !important;
-            }
-
-            body.dark label {
-                color: #fff !important;
-            }
-
-            body.dark ::placeholder {
-                color: #fff !important;
-            }
-
-            /* end optional */
-            body.dark input {
-                background-color: #292c35 !important;
-            }
-
-            .checkbox {
-                display: none !important;
-            }
-
-            .label {
-                background-color: #111;
-                float: right;
-                align-items: center;
-                justify-content: space-between;
-                padding: 5px;
-                position: relative;
-                border-radius: 50px;
-                display: flex;
-                height: 17px;
-                width: 41px;
-            }
-
-            .switch {
-                background-color: white;
-                position: absolute;
-                top: 2px;
-                left: 2px;
-                border-radius: 50%;
-                width: 22px;
-                height: 22px;
-                transition: transform 0.2s linear;
-            }
-
-            .checkbox:checked + .label .switch {
-                transform: translateX(24px);
-            }
-            /* dark mode end */
-            .success,
-            .error {
-                color: white;
-                padding: 5px;
-                margin: 5px 0 15px 0;
-            }
-
-            .success {
-                background-color: green;
-            }
-
-            .error {
-                background-color: red;
-            }
-
-            .button {
-                float: right;
-            }
-        </style>
-        <title>Book List</title>
-    </head>
-    <body>
-        <div class="container">
-            <div id="heading">
-                <h1>Add Book</h1>
-            </div>
+<body>
+    <div class="container">
+        <header id="heading">
+            <h1>Add Book</h1>
             <!-- dark mode start -->
             <div>
                 <input type="checkbox" id="checkbox" class="checkbox" />
@@ -118,48 +24,40 @@
                 </label>
             </div>
             <!-- dark mode end -->
-            <form id="book-form">
-                <div>
-                    <label for="title" id="book-title">Book Title</label>
-                    <input type="text" id="title" class="u-full-width" />
-                </div>
-                <div>
-                    <label for="author">Author</label>
-                    <input type="text" id="author" class="u-full-width" />
-                </div>
-                <div>
-                    <label for="ISBN">ISBN</label>
-                    <input type="text" id="ISBN" class="u-full-width" />
-                </div>
-                <div>
-                    <input
-                        type="submit"
-                        value="submit"
-                        class="u-full-width"
-                        id="submit-btn"
-                    />
-                </div>
-            </form>
-            <table class="u-full-width">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>ISBN</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="book-list"></tbody>
-            </table>
-            <div class="clear-tasks">
-                <input
-                    type="button"
-                    value="Clear all books"
-                    class="button"
-                    id="clear-btn"
-                />
+        </header>
+        <form id="book-form">
+            <div>
+                <label for="title" id="book-title">Book Title</label>
+                <input type="text" id="title" class="u-full-width" />
             </div>
+            <div>
+                <label for="author">Author</label>
+                <input type="text" id="author" class="u-full-width" />
+            </div>
+            <div>
+                <label for="ISBN">ISBN</label>
+                <input type="text" id="ISBN" class="u-full-width" />
+            </div>
+            <div>
+                <input type="submit" value="submit" class="u-full-width" id="submit-btn" />
+            </div>
+        </form>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="book-list"></tbody>
+        </table>
+        <div class="clear-tasks">
+            <input type="button" value="Clear all books" class="button" id="clear-btn" />
         </div>
-        <script src="app.js"></script>
-    </body>
+    </div>
+    <script src="app.js"></script>
+</body>
+
 </html>
