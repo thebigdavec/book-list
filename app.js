@@ -1,3 +1,40 @@
+const themeToggle = document.getElementById('checkbox')
+
+// Check color scheme and watch for changes
+window
+  .matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener('change', e => {
+    if (!localStorage.getItem('isDarkTheme')) {
+      resetColorScheme()
+    }
+  })
+function resetColorScheme() {
+  if (!localStorage.getItem('isDarkTheme')) {
+    if (window.matchMedia('(prefers-color-scheme: no-preference').matches)
+      return
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.body.classList.add('light')
+      document.body.classList.remove('dark')
+      themeToggle.checked = false
+    } else {
+      document.body.classList.remove('light')
+      document.body.classList.add('dark')
+      themeToggle.checked = true
+    }
+  } else {
+    const isDarkTheme = localStorage.getItem('isDarkTheme') === 'true'
+    if (isDarkTheme) {
+      document.body.classList.remove('light')
+      document.body.classList.add('dark')
+      themeToggle.checked = true
+    } else {
+      document.body.classList.add('light')
+      document.body.classList.remove('dark')
+      themeToggle.checked = false
+    }
+  }
+}
+
 // Create Book class
 class Book {
   constructor(title, author, isbn) {
@@ -128,32 +165,7 @@ function initialSetup() {
   resetColorScheme()
   Store.displayBooks()
 }
-function resetColorScheme() {
-  if (!localStorage.getItem('isDarkTheme')) {
-    if (window.matchMedia('(prefers-color-scheme: no-preference').matches)
-      return
-    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      document.body.classList.add('light')
-      document.body.classList.remove('dark')
-      document.getElementById('checkbox').checked = false
-    } else {
-      document.body.classList.remove('light')
-      document.body.classList.add('dark')
-      document.getElementById('checkbox').checked = true
-    }
-  } else {
-    const isDarkTheme = localStorage.getItem('isDarkTheme') === 'true'
-    if (isDarkTheme) {
-      document.body.classList.remove('light')
-      document.body.classList.add('dark')
-      document.getElementById('checkbox').checked = true
-    } else {
-      document.body.classList.add('light')
-      document.body.classList.remove('dark')
-      document.getElementById('checkbox').checked = false
-    }
-  }
-}
+
 // Event Listener for submit
 document.getElementById('book-form').addEventListener('submit', function (e) {
   // get form values
@@ -199,11 +211,20 @@ document.getElementById('clear-btn').addEventListener('click', function (e) {
 })
 
 // dark mode start
-document.getElementById('checkbox').addEventListener('change', function () {
-  document.body.classList.toggle('light')
-  document.body.classList.toggle('dark')
-  document.body.classList.contains('dark')
-    ? localStorage.setItem('isDarkTheme', true)
-    : localStorage.setItem('isDarkTheme', false)
+themeToggle.addEventListener('click', function (e) {
+  if (e.altKey) {
+    localStorage.removeItem('isDarkTheme')
+    resetColorScheme()
+  } else {
+    if (themeToggle.checked) {
+      document.body.classList.remove('light')
+      document.body.classList.add('dark')
+      localStorage.setItem('isDarkTheme', true)
+    } else {
+      document.body.classList.remove('dark')
+      document.body.classList.add('light')
+      localStorage.setItem('isDarkTheme', false)
+    }
+  }
 })
 // dark mode end
