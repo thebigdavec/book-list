@@ -10,6 +10,13 @@
     /* Light Mode Colors */
     --clr-fg: var(--clr-dark);
     --clr-bg: var(--clr-light);
+    /* Border Radii */
+    --br-base: 10px;
+    --br-small: calc(var(--br-base) / 4);
+    --br-mid: calc(var(--br-base) / 2);
+    --br: var(--br-base);
+    --br-large: calc(var(--br-base) * 1.5);
+    --br-pill: 99vw;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,7 +51,7 @@ body {
     margin-inline: auto;
     padding: 2rem;
     border: 1px solid #888;
-    border-radius: 5px;
+    border-radius: var(--br);
 }
 
 #heading {
@@ -76,6 +83,8 @@ body {
     font-size: x-large;
     background-color: #8884;
     color: var(--clr-fg-lightmode, var(--clr-fg));
+    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg));
+    border-radius: var(--br);
 }
 
 #submit-btn,
@@ -87,7 +96,7 @@ body {
     justify-self: right;
     letter-spacing: 1px;
     border: 1px solid var(--clr-fg-lightmode, var(--clr-fg));
-    border-radius: 5px;
+    border-radius: var(--br-mid);
     background-color: #8884;
     color: var(--clr-fg-lightmode, var(--clr-fg));
 }
@@ -113,7 +122,7 @@ body {
     padding: 5px;
     position: relative;
     border: 2px solid #888;
-    border-radius: 50px;
+    border-radius: var(--br-pill);
     box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
     display: flex;
     height: 31px;
@@ -126,7 +135,7 @@ body {
     position: absolute;
     top: 3px;
     left: 3.5px;
-    border-radius: 50%;
+    border-radius: var(--br-pill);
     box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
     width: 22px;
     height: 22px;
@@ -170,7 +179,7 @@ td {
     background-color: #8888;
     width: 2rem;
     height: 2rem;
-    border-radius: 2rem;
+    border-radius: var(--br-pill);
     transition: background-color 250ms ease-out;
 }
 
@@ -190,7 +199,7 @@ input[type='checkbox'] {
     margin: 5px 0 15px 0;
     animation: fade-to-bg 3s forwards, fade 1s forwards 2s;
     transform-origin: top;
-    border-radius: 1em;
+    border-radius: var(--br-pill);
 }
 
 .success {
