@@ -263,8 +263,8 @@ input[type='checkbox'] {
     background-color: #f006;
 }
 
-.button {
-    float: right;
+.clear-tasks {
+    text-align: right;
 }
 
 @keyframes fade-to-bg {
