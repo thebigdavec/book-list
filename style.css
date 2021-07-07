@@ -17,6 +17,7 @@
     --br: var(--br-base);
     --br-large: calc(var(--br-base) * 1.5);
     --br-pill: 99vw;
+    --main-transition: background-color 250ms ease-out, color 250ms ease-out;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,6 +32,12 @@
     /* Programmed light mode colors */
     --clr-fg-lightmode: var(--clr-dark);
     --clr-bg-lightmode: var(--clr-light);
+    /* --moon-lightmode: -25%; */
+}
+
+.dark {
+    --clr-fg-darkmode: var(--clr-light);
+    --clr-bg-darkmode: var(--clr-dark);
 }
 
 body {
@@ -41,8 +48,9 @@ body {
     min-height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: var(--clr-bg-lightmode, var(--clr-bg));
-    color: var(--clr-fg-lightmode, var(--clr-fg));
+    background-color: var( --clr-bg-lightmode, var(--clr-bg-darkmode, var(--clr-bg)));
+    color: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
+    transition: var(--main-transition);
 }
 
 .container {
@@ -82,8 +90,8 @@ body {
     padding: 1rem;
     font-size: x-large;
     background-color: #8884;
-    color: var(--clr-fg-lightmode, var(--clr-fg));
-    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg));
+    color: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
+    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
     border-radius: var(--br);
 }
 
@@ -95,10 +103,10 @@ body {
     width: fit-content;
     justify-self: right;
     letter-spacing: 1px;
-    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg));
+    border: 1px solid var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
     border-radius: var(--br-mid);
     background-color: #8884;
-    color: var(--clr-fg-lightmode, var(--clr-fg));
+    color: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
 }
 
 #submit-btn:hover,
@@ -115,35 +123,80 @@ body {
 }
 
 .label {
+    font-size: 1.5rem;
     background-image: linear-gradient(to right, #aaa 48%, #111 52%, #444 52%);
     margin-left: auto;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    padding: 0.35em;
     position: relative;
-    border: 2px solid #888;
+    border: 0.1em solid #888;
     border-radius: var(--br-pill);
     box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
     display: flex;
-    height: 31px;
-    width: 56px;
+    height: 1.8em;
+    width: 3.5em;
     cursor: pointer;
 }
 
 .switch {
     background-color: #888;
     position: absolute;
-    top: 3px;
-    left: 3.5px;
+    top: 0.1em;
+    left: 0.125em;
     border-radius: var(--br-pill);
     box-shadow: -2px -2px 2px #fff8, 2px 2px 2px #0004;
-    width: 22px;
-    height: 22px;
+    width: 1.4em;
+    height: 1.4em;
     transition: transform 250ms ease-in;
 }
 
+.switch::before,
+.switch::after {
+    content: '';
+    position: absolute;
+    inset: 0.25em;
+    background: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
+    transition: transform 1s cubic-bezier(0.17, 0.67, 0.53, 1.5), background-color 0.5s ease-out;
+}
+
+.switch::after {
+    transform: rotate(45deg);
+}
+
+.moon {
+    position: absolute;
+    inset: 0.33em;
+    border-radius: var(--br-pill);
+    background-color: var( --clr-bg-lightmode, var(--clr-bg-darkmode, var(--clr-bg)));
+    z-index: 2;
+    overflow: hidden;
+}
+
+.moon::after {
+    content: '';
+    position: absolute;
+    inset: 0.075em;
+    background: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
+    border-radius: var(--br-pill);
+    transform: translateX(-25%);
+    transition: transform 1s cubic-bezier(0.17, 0.67, 0.53, 1.5), background-color 0.5s ease-out;
+}
+
 .checkbox:checked+.label .switch {
-    transform: translateX(24px);
+    transform: translateX(1.7em);
+}
+
+.checkbox:checked+.label .switch::before {
+    transform: rotate(0.5turn);
+}
+
+.checkbox:checked+.label .switch::after {
+    transform: rotate(225deg);
+}
+
+.checkbox:checked+.label .moon::after {
+    transform: translateX(0);
 }
 
 a {
@@ -180,7 +233,7 @@ td {
     width: 2rem;
     height: 2rem;
     border-radius: var(--br-pill);
-    transition: background-color 250ms ease-out;
+    transition: var(--main-transition);
 }
 
 .delete:hover,
@@ -194,7 +247,7 @@ input[type='checkbox'] {
 
 .success,
 .error {
-    color: var(--clr-fg-lightmode, var(--clr-fg));
+    color: var(--clr-fg-lightmode, var(--clr-fg-darkmode, var(--clr-fg)));
     padding: 0.3em 1em;
     margin: 5px 0 15px 0;
     animation: fade-to-bg 3s forwards, fade 1s forwards 2s;
@@ -216,7 +269,7 @@ input[type='checkbox'] {
 
 @keyframes fade-to-bg {
     to {
-        background-color: var(--clr-bg-lightmode, var(--clr-bg));
+        background-color: var( --clr-bg-lightmode, var(--clr-bg-darkmode, var(--clr-bg)));
     }
 }
 

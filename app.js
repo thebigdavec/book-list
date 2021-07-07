@@ -129,13 +129,29 @@ function initialSetup() {
   Store.displayBooks()
 }
 function resetColorScheme() {
-  if (window.matchMedia('(prefers-color-scheme: no-preference').matches) return
-  if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.body.classList.add('light')
-    document.getElementById('checkbox').checked = false
+  if (!localStorage.getItem('isDarkTheme')) {
+    if (window.matchMedia('(prefers-color-scheme: no-preference').matches)
+      return
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.body.classList.add('light')
+      document.body.classList.remove('dark')
+      document.getElementById('checkbox').checked = false
+    } else {
+      document.body.classList.remove('light')
+      document.body.classList.add('dark')
+      document.getElementById('checkbox').checked = true
+    }
   } else {
-    document.body.classList.remove('light')
-    document.getElementById('checkbox').checked = true
+    const isDarkTheme = localStorage.getItem('isDarkTheme') === 'true'
+    if (isDarkTheme) {
+      document.body.classList.remove('light')
+      document.body.classList.add('dark')
+      document.getElementById('checkbox').checked = true
+    } else {
+      document.body.classList.add('light')
+      document.body.classList.remove('dark')
+      document.getElementById('checkbox').checked = false
+    }
   }
 }
 // Event Listener for submit
@@ -185,5 +201,9 @@ document.getElementById('clear-btn').addEventListener('click', function (e) {
 // dark mode start
 document.getElementById('checkbox').addEventListener('change', function () {
   document.body.classList.toggle('light')
+  document.body.classList.toggle('dark')
+  document.body.classList.contains('dark')
+    ? localStorage.setItem('isDarkTheme', true)
+    : localStorage.setItem('isDarkTheme', false)
 })
 // dark mode end
